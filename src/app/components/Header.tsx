@@ -3,20 +3,35 @@ import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button/button";
 import CreateOrEditHabitDialog from "@/shared/ui/CreateOrEditHabitDialog";
 import type { CreateOrEditHabitDialogFormData } from "@/shared/ui/CreateOrEditHabitDialog";
+import { useDispatch } from "react-redux";
+import { addHabit } from "@/features/habits/slice";
+import type { Habit } from "@/features/habits/types";
 
 export default function Header() {
   const [showAddHabitModal, setShowAddHabitModal] = useState(false);
-
+  const dispatch = useDispatch();
   const hideHabitModalHandler = useCallback(() => {
     setShowAddHabitModal(false);
   }, []);
 
   const onSubmitHandler = useCallback(
     (formData: CreateOrEditHabitDialogFormData) => {
-      console.log(formData, "salom");
+      const createdAt = new Date().toISOString();
+
+      const newHabit: Habit = {
+        id: Date.now().toString(),
+        name: formData.name,
+        description: formData.description!,
+        type: "custom",
+        createdAt,
+        updatedAt: createdAt,
+      };
+
+      dispatch(addHabit(newHabit));
+
       setShowAddHabitModal(false);
     },
-    []
+    [dispatch]
   );
 
   return (

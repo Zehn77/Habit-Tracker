@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/card";
 
 import { Badge } from "@/components/ui/badge/badge";
-import { Button } from "@/components/ui/button/button";
-import { Pencil, Trash2 } from "lucide-react";
+import EditHabitButton from "./EditHabitButton";
+import DeleteHabitButton from "./DeleteHabitButton";
 
 export default function HabitItem({ habit }: HabitItemProps) {
   return (
@@ -37,14 +37,8 @@ export default function HabitItem({ habit }: HabitItemProps) {
       </CardContent>
 
       <CardFooter className="flex justify-end gap-2">
-        <Button disabled variant="outline" size="sm">
-          <Pencil className="w-4 h-4 mr-1" />
-          Edit
-        </Button>
-        <Button disabled variant="destructive" size="sm">
-          <Trash2 className="w-4 h-4 mr-1" />
-          Delete
-        </Button>
+        <EditHabitButton habit={habit} />
+        <DeleteHabitButton habit={habit} />
       </CardFooter>
     </Card>
   );
