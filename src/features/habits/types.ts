@@ -8,3 +8,7 @@ export type Habit = {
 };
 
 export type HabitsState = Habit[];
+
+export type HabitItemProps = {
+  habit: Habit;
+};

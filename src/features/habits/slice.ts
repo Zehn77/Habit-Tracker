@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { HabitsState } from "./types";
+import { PREDEFINED_HABITS } from "./constants";
 
-const initialState: HabitsState = [];
+const initialState: HabitsState = PREDEFINED_HABITS;
 
 const habitsSlice = createSlice({
   name: "habits",
