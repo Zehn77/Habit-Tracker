@@ -1,63 +1,34 @@
 import { Button } from "@/components/ui/button/button";
 import type { Habit } from "@/features/habits/types";
-import CreateOrEditHabitDialog, {
-  type CreateOrEditHabitDialogFormData,
-} from "@/shared/ui/CreateOrEditHabitDialog";
 import { Pencil } from "lucide-react";
 import { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { editHabit } from "../slice";
+import HabitForm from "@/shared/ui/HabitForm";
+import Modal from "@/shared/ui/Modal";
 
 export default function EditHabitButton({ habit }: { habit: Habit }) {
-  const [showEditHabitModal, setShowEditHabitModal] = useState(false);
-  const dispatch = useDispatch();
+  const [showHabitModal, setShowHabitModal] = useState(false);
 
-  const editHabitHandler = () => {
-    setShowEditHabitModal(true);
-  };
-
-  const hideHabitModalHandler = useCallback(() => {
-    setShowEditHabitModal(false);
+  const handleCloseHabitModal = useCallback(() => {
+    setShowHabitModal(false);
   }, []);
 
-  const onSubmitHandler = useCallback(
-    (formData: CreateOrEditHabitDialogFormData) => {
-      const updatedHabit: Habit = {
-        id: habit.id,
-        createdAt: habit.createdAt,
-        type: habit.type,
-        name: formData.name,
-        description: formData.description as string,
-        updatedAt: new Date().toISOString(),
-      };
-      dispatch(editHabit(updatedHabit));
-      setShowEditHabitModal(false);
-    },
-    [dispatch, habit]
-  );
-
   return (
-    <>
-      <Button
-        disabled={habit.type === "predefined"}
-        variant="outline"
-        size="sm"
-        className="cursor-pointer"
-        onClick={editHabitHandler}
-      >
-        <Pencil className="w-4 h-4 mr-1" />
-        Edit
-      </Button>
-
-      <CreateOrEditHabitDialog
-        isOpen={showEditHabitModal}
-        onClose={hideHabitModalHandler}
-        onSubmit={onSubmitHandler}
-        defaultFormData={{
-          name: habit.name,
-          description: habit.description,
-        }}
-      />
-    </>
+    <Modal isOpen={showHabitModal} onClose={handleCloseHabitModal}>
+      <Modal.OpenButton>
+        <Button
+          disabled={habit.type === "predefined"}
+          variant="outline"
+          size="sm"
+          className="cursor-pointer"
+          onClick={() => setShowHabitModal(true)}
+        >
+          <Pencil className="w-4 h-4 mr-1" />
+          Edit
+        </Button>
+      </Modal.OpenButton>
+      <Modal.Content title="Edit The Habit">
+        <HabitForm habit={habit} onClose={handleCloseHabitModal} />
+      </Modal.Content>
+    </Modal>
   );
 }
