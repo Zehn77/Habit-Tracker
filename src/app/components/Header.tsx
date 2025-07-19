@@ -1,12 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button/button";
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import HabitsList from "./HabitsList";
-
 import Modal from "@/shared/ui/Modal";
 import HabitForm from "@/shared/ui/HabitForm";
+import Tabs from "@/shared/ui/Tabs";
 
 export default function Header() {
   const [showHabitModal, setShowHabitModal] = useState(false);
@@ -58,22 +56,18 @@ export default function Header() {
           </Modal.OpenButton>
 
           <Modal.Content>
-            <Tabs defaultValue="create" className="mt-3">
-              <TabsList className="w-full">
-                <TabsTrigger value="create" className="cursor-pointer">
-                  Create New Habit
-                </TabsTrigger>
-                <TabsTrigger value="select" className="cursor-pointer">
-                  Select The Habit
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="create">
-                <HabitForm onClose={handleCloseHabitModal} />
-              </TabsContent>
-              <TabsContent value="select">
-                <HabitsList />
-              </TabsContent>
-            </Tabs>
+            <Tabs
+              dataSource={[
+                {
+                  title: "Create New Habit",
+                  content: <HabitForm onClose={handleCloseHabitModal} />,
+                },
+                {
+                  title: "Select The Habit",
+                  content: <HabitsList />,
+                },
+              ]}
+            />
           </Modal.Content>
         </Modal>
       </div>
