@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button/button";
-import HabitsList from "./HabitsList";
+import PredefinedHabitsList from "./HabitsList";
 import Modal from "@/shared/ui/Modal";
 import HabitForm from "@/shared/ui/HabitForm";
 import Tabs from "@/shared/ui/Tabs";
@@ -64,7 +64,7 @@ export default function Header() {
                 },
                 {
                   title: "Select The Habit",
-                  content: <HabitsList />,
+                  content: <PredefinedHabitsList onClose={handleCloseHabitModal} />,
                 },
               ]}
             />

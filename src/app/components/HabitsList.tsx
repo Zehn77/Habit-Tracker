@@ -1,30 +1,45 @@
 import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button/button";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { PREDEFINED_HABITS } from "@/features/habits/constants";
+import type { Habit } from "@/features/habits/types";
+import { useDispatch } from "react-redux";
+import { addHabit } from "@/features/habits/slice";
 
-export default function HabitsList() {
+type PredefinedHabitsListProps = {
+  onClose: () => void;
+};
+
+function PredefinedHabitsList({ onClose }: PredefinedHabitsListProps) {
   const [selectedHabitId, setSelectedHabitId] = useState<string | null>(null);
+  const dispatch = useDispatch();
+  function handleOnSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-  function handleOnSubmit() {}
+    const selectedHabit: Habit = PREDEFINED_HABITS.filter(
+      (habit) => habit.id === selectedHabitId
+    )[0];
+
+    dispatch(addHabit(selectedHabit));
+
+    onClose();
+  }
 
   return (
     <form onSubmit={handleOnSubmit}>
       <div className="max-h-64 overflow-y-auto pr-1 py-2">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 px-2">
           {PREDEFINED_HABITS.map((habit) => (
-            <div
-              key={habit.id}
+            <Button
               onClick={() => setSelectedHabitId(habit.id)}
-              className={`p-4 border rounded-xl cursor-pointer transition ${
-                selectedHabitId === habit.id
-                  ? "border-primary bg-primary/10"
-                  : "border-muted"
-              }`}
+              type="button"
+              key={habit.id}
+              variant={selectedHabitId === habit.id ? "default" : "outline"}
+              className="cursor-pointer py-6 text-sm"
             >
-              <h4 className="font-medium text-sm text-center">{habit.name}</h4>
-            </div>
+              {habit.name}
+            </Button>
           ))}
         </div>
       </div>
@@ -35,10 +50,16 @@ export default function HabitsList() {
             Cancel
           </Button>
         </DialogClose>
-        <Button type="submit" className="cursor-pointer">
+        <Button
+          disabled={selectedHabitId === null}
+          type="submit"
+          className="cursor-pointer"
+        >
           Save changes
         </Button>
       </DialogFooter>
     </form>
   );
 }
+
+export default memo(PredefinedHabitsList);

@@ -44,6 +44,7 @@ function HabitForm({ habit, onClose }: HabitFormProps) {
 
   function onSubmit({ name, description }: z.infer<typeof formSchema>) {
     const currentDate = new Date().toISOString();
+
     if (habit) {
       const updatedHabit: Habit = {
         ...habit,
@@ -106,9 +107,13 @@ function HabitForm({ habit, onClose }: HabitFormProps) {
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline" className="cursor-pointer">
+              Cancel
+            </Button>
           </DialogClose>
-          <Button type="submit">Save changes</Button>
+          <Button type="submit" className="cursor-pointer">
+            Save changes
+          </Button>
         </DialogFooter>
       </form>
     </Form>
