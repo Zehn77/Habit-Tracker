@@ -5,6 +5,12 @@ import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import ConfirmModal from "@/shared/ui/ConfirmModal";
 import { deleteHabit } from "../slice";
+import { deleteProgress } from "@/features/progress/slice";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function DeleteHabitButton({ habit }: { habit: Habit }) {
   const [showDeleteHabitModal, setShowDeleteHabitModal] = useState(false);
@@ -16,6 +22,7 @@ export default function DeleteHabitButton({ habit }: { habit: Habit }) {
 
   const deleteHabitHandler = () => {
     dispatch(deleteHabit(habit.id));
+    dispatch(deleteProgress(habit.id));
     setShowDeleteHabitModal(false);
   };
 
@@ -25,16 +32,21 @@ export default function DeleteHabitButton({ habit }: { habit: Habit }) {
 
   return (
     <>
-      <Button
-        onClick={openDeleteHabitModal}
-        disabled={habit.type === "predefined"}
-        variant="destructive"
-        size="sm"
-        className="cursor-pointer"
-      >
-        <Trash2 className="w-4 h-4 mr-1" />
-        Delete
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            onClick={openDeleteHabitModal}
+            variant="outline"
+            size="sm"
+            className="cursor-pointer"
+          >
+            <Trash2 className="w-4 h-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Deleting the Habit</p>
+        </TooltipContent>
+      </Tooltip>
 
       <ConfirmModal
         onConfirm={deleteHabitHandler}

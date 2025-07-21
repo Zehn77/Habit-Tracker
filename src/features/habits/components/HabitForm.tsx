@@ -43,25 +43,27 @@ function HabitForm({ habit, onClose }: HabitFormProps) {
   });
 
   function onSubmit({ name, description }: z.infer<typeof formSchema>) {
-    const currentDate = new Date().toISOString();
+    const currentDate = new Date();
 
     if (habit) {
       const updatedHabit: Habit = {
         ...habit,
         name,
         description: description as string,
-        updatedAt: currentDate,
+        updatedAt: currentDate.toISOString(),
       };
 
       dispatch(editHabit(updatedHabit));
     } else {
+      const habitId = Date.now().toString();
+
       const newHabit: Habit = {
-        id: Date.now().toString(),
+        id: habitId,
         name,
         description: description as string,
         type: "custom",
-        createdAt: currentDate,
-        updatedAt: currentDate,
+        createdAt: currentDate.toISOString(),
+        updatedAt: currentDate.toISOString(),
       };
 
       dispatch(addHabit(newHabit));

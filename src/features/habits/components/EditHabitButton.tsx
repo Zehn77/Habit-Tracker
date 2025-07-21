@@ -2,8 +2,13 @@ import { Button } from "@/components/ui/button/button";
 import type { Habit } from "@/features/habits/types";
 import { Pencil } from "lucide-react";
 import { useState, useCallback } from "react";
-import HabitForm from "@/shared/ui/HabitForm";
+import HabitForm from "@/features/habits/components/HabitForm";
 import Modal from "@/shared/ui/Modal";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function EditHabitButton({ habit }: { habit: Habit }) {
   const [showHabitModal, setShowHabitModal] = useState(false);
@@ -15,16 +20,22 @@ export default function EditHabitButton({ habit }: { habit: Habit }) {
   return (
     <Modal isOpen={showHabitModal} onClose={handleCloseHabitModal}>
       <Modal.OpenButton>
-        <Button
-          disabled={habit.type === "predefined"}
-          variant="outline"
-          size="sm"
-          className="cursor-pointer"
-          onClick={() => setShowHabitModal(true)}
-        >
-          <Pencil className="w-4 h-4 mr-1" />
-          Edit
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              disabled={habit.type === "predefined"}
+              variant="outline"
+              size="sm"
+              className="cursor-pointer"
+              onClick={() => setShowHabitModal(true)}
+            >
+              <Pencil className="w-4 h-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Editing the Habit</p>
+          </TooltipContent>
+        </Tooltip>
       </Modal.OpenButton>
       <Modal.Content title="Edit The Habit">
         <HabitForm habit={habit} onClose={handleCloseHabitModal} />

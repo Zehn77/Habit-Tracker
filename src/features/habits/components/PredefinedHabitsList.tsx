@@ -6,6 +6,9 @@ import { PREDEFINED_HABITS } from "@/features/habits/constants";
 import type { Habit } from "@/features/habits/types";
 import { useDispatch } from "react-redux";
 import { addHabit } from "@/features/habits/slice";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/app/store";
+import { Inbox } from "lucide-react";
 
 type PredefinedHabitsListProps = {
   onClose: () => void;
@@ -14,10 +17,17 @@ type PredefinedHabitsListProps = {
 function PredefinedHabitsList({ onClose }: PredefinedHabitsListProps) {
   const [selectedHabitId, setSelectedHabitId] = useState<string | null>(null);
   const dispatch = useDispatch();
+
+  const existingHabits = useSelector((state: RootState) => state.habits);
+
+  const filteredPredefinedHabits = PREDEFINED_HABITS.filter(
+    (pre) => !existingHabits.some((habit) => habit.id === pre.id)
+  );
+
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const selectedHabit: Habit = PREDEFINED_HABITS.filter(
+    const selectedHabit: Habit = filteredPredefinedHabits.filter(
       (habit) => habit.id === selectedHabitId
     )[0];
 
@@ -26,13 +36,26 @@ function PredefinedHabitsList({ onClose }: PredefinedHabitsListProps) {
     onClose();
   }
 
+  function handleHabitClick(habitId: string) {
+    setSelectedHabitId(habitId);
+  }
+
+  if (filteredPredefinedHabits.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-10 text-gray-500">
+        <Inbox className="w-10 h-10 mb-2" />
+        <p>No more habits to add 🎉</p>
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={handleOnSubmit}>
       <div className="max-h-64 overflow-y-auto pr-1 py-2">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 px-2">
-          {PREDEFINED_HABITS.map((habit) => (
+          {filteredPredefinedHabits.map((habit) => (
             <Button
-              onClick={() => setSelectedHabitId(habit.id)}
+              onClick={() => handleHabitClick(habit.id)}
               type="button"
               key={habit.id}
               variant={selectedHabitId === habit.id ? "default" : "outline"}

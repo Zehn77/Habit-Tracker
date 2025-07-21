@@ -155,7 +155,6 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
 }
 
 export {
-  // useFormField, temporarly commonted it because avoid lint issues
   Form,
   FormItem,
   FormLabel,
