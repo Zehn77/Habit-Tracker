@@ -13,7 +13,6 @@ type HabitTodayCheckboxProps = {
 function HabitTodayCheckbox({ habitId }: HabitTodayCheckboxProps) {
   const allProgress = useSelector((state: RootState) => state.progress);
   const dispatch = useDispatch();
-  console.log(allProgress);
 
   const habitProgress = allProgress.find(
     (entry) =>
@@ -40,7 +39,7 @@ function HabitTodayCheckbox({ habitId }: HabitTodayCheckboxProps) {
   return (
     <Label
       htmlFor={habitId}
-      className="italic text-stone-500 cursor-pointer inline-flex items-center"
+      className="italic text-stone-500 cursor-pointer inline-flex items-center min-w-[120px]"
     >
       <Checkbox
         id={habitId}

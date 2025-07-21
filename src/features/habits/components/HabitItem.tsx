@@ -11,6 +11,7 @@ import HabitTodayCheckbox from "./HabitTodayCheckbox";
 
 import EditHabitButton from "./EditHabitButton";
 import DeleteHabitButton from "./DeleteHabitButton";
+import HabitStatusPicker from "@/features/progress/components/HabitStatusPicker";
 
 export default function HabitItem({ habit }: HabitItemProps) {
   return (
@@ -24,8 +25,11 @@ export default function HabitItem({ habit }: HabitItemProps) {
         </CardDescription>
       </CardHeader>
 
-      <CardFooter className="flex justify-between gap-2">
-        <HabitTodayCheckbox habitId={habit.id} />
+      <CardFooter className="flex justify-between items-end gap-2">
+        <div className="flex items-center gap-3">
+          <HabitTodayCheckbox habitId={habit.id} />
+          <HabitStatusPicker habitId={habit.id} />
+        </div>
 
         <Link
           to={`/habit/${habit.id}`}
