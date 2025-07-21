@@ -3,18 +3,18 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button/button";
+} from "@/shared/components/tooltip";
+import { Button } from "@/shared/components/button/button";
 import { useState } from "react";
 import Modal from "@/shared/ui/Modal";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/shared/components/calendar";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/app/store";
-import { DialogFooter } from "@/components/ui/dialog";
+import { DialogFooter } from "@/shared/components/dialog";
 import { useDispatch } from "react-redux";
 import { addProgress } from "../slice";
 import type { HabitProgressEntry } from "../types";
-import { formatDateToISO } from "@/shared/utils/date";
+import { formatDateToISO } from "@/shared/lib/date";
 
 type HabitStatusPickerProps = {
   habitId: string;

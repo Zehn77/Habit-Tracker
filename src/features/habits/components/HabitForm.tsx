@@ -8,11 +8,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button/button";
-import { Textarea } from "@/components/ui/textarea";
-import { DialogFooter } from "@/components/ui/dialog";
+} from "@/shared/components/form";
+import { Input } from "@/shared/components/input";
+import { Button } from "@/shared/components/button/button";
+import { Textarea } from "@/shared/components/textarea";
+import { DialogFooter } from "@/shared/components/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
 import type { Habit } from "@/features/habits/types";
 import { useDispatch } from "react-redux";

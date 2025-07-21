@@ -3,7 +3,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/tabs";
+} from "@/shared/components/tabs";
 import type { ReactNode } from "react";
 
 type Tab = {

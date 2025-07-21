@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { memo, useCallback, useState } from "react";
-import { Button } from "@/components/ui/button/button";
+import { Button } from "@/shared/components/button/button";
 import PredefinedHabitsList from "../../features/habits/components/PredefinedHabitsList";
 import Modal from "@/shared/ui/Modal";
 import HabitForm from "@/features/habits/components/HabitForm";
@@ -11,7 +11,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/shared/components/tooltip";
 
 function Header() {
   const [showHabitModal, setShowHabitModal] = useState(false);

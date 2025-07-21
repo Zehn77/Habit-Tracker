@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/app/store";
-import { formatDateTime } from "@/shared/utils/date";
+import { formatDateTime } from "@/shared/lib/date";
 import { FileX2 } from "lucide-react";
-import { Button } from "@/components/ui/button/button";
+import { Button } from "@/shared/components/button/button";
 import { Link } from "react-router-dom";
 import HabitStatusPicker from "@/features/progress/components/HabitStatusPicker";
 

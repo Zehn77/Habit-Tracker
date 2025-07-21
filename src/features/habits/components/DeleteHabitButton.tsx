@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button/button";
+import { Button } from "@/shared/components/button/button";
 import type { Habit } from "@/features/habits/types";
 import { Trash2 } from "lucide-react";
 import { useState, useCallback } from "react";
@@ -10,7 +10,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/shared/components/tooltip";
 
 export default function DeleteHabitButton({ habit }: { habit: Habit }) {
   const [showDeleteHabitModal, setShowDeleteHabitModal] = useState(false);

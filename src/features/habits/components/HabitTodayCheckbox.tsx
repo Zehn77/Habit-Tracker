@@ -1,10 +1,10 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/shared/components/checkbox";
+import { Label } from "@/shared/components/label";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "@/app/store";
 import type { HabitProgressEntry } from "@/features/progress/types";
 import { addProgress, deleteProgress } from "@/features/progress/slice";
-import { formatDateToISO } from "@/shared/utils/date";
+import { formatDateToISO } from "@/shared/lib/date";
 
 type HabitTodayCheckboxProps = {
   habitId: string;

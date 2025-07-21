@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
+} from "@/shared/components/dialog";
 
 type ModalProps = {
   isOpen: boolean;

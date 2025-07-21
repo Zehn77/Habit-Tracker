@@ -6,7 +6,7 @@ import {
   CardTitle,
   CardDescription,
   CardFooter,
-} from "@/components/ui/card";
+} from "@/shared/components/card";
 import HabitTodayCheckbox from "./HabitTodayCheckbox";
 
 import EditHabitButton from "./EditHabitButton";

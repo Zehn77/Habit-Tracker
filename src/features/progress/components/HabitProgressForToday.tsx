@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "@/app/store";
-import { formatDateToISO } from "@/shared/utils/date";
-import { Badge } from "@/components/ui/badge/badge";
+import { formatDateToISO } from "@/shared/lib/date";
+import { Badge } from "@/shared/components/badge/badge";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/shared/components/tooltip";
 
 export default function HabitProgressForToday() {
   const habits = useSelector((state: RootState) => state.habits);

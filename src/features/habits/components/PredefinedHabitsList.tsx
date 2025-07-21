@@ -1,5 +1,5 @@
-import { DialogFooter } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button/button";
+import { DialogFooter } from "@/shared/components/dialog";
+import { Button } from "@/shared/components/button/button";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { memo, useState } from "react";
 import { PREDEFINED_HABITS } from "@/features/habits/constants";
