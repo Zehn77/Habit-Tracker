@@ -12,6 +12,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/shared/components/tooltip";
+import { cn } from "@/shared/lib/utils";
+
+const NAV_ITEMS = [
+  { label: "Habits", path: "/" },
+  { label: "Statistics", path: "stats" },
+];
 
 function Header() {
   const [showHabitModal, setShowHabitModal] = useState(false);
@@ -24,31 +30,23 @@ function Header() {
     <header className="sticky top-0 z-50 bg-white shadow">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-2 md:px-4 py-3">
         <nav className="space-x-2 md:space-x-6 font-semibold">
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              `transition-colors duration-300 ${
-                isActive
-                  ? "text-stone-800"
-                  : "text-stone-500 hover:text-stone-800"
-              }`
-            }
-          >
-            Habits
-          </NavLink>
-          <NavLink
-            to="/stats"
-            className={({ isActive }) =>
-              `transition-colors duration-300 ${
-                isActive
-                  ? "text-stone-800"
-                  : "text-stone-500 hover:text-stone-800"
-              }`
-            }
-          >
-            Statistics
-          </NavLink>
+          {NAV_ITEMS.map(({ label, path }) => (
+            <NavLink
+              key={path}
+              to={path}
+              end
+              className={({ isActive }) =>
+                cn(
+                  "transition-colors duration-300",
+                  isActive
+                    ? "text-stone-800"
+                    : "text-stone-500 hover:text-stone-800"
+                )
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
         </nav>
 
         <div className="flex items-center space-x-1 md:space-x-2">
