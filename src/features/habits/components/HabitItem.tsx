@@ -21,7 +21,7 @@ export default function HabitItem({ habit }: HabitItemProps) {
           {habit.name}
         </CardTitle>
         <CardDescription className="truncate font-semibold">
-          {habit.description === "" ? "..." : habit.description}
+          {habit.description || "\u00A0"}
         </CardDescription>
       </CardHeader>
 
