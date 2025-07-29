@@ -1,18 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { memo, useCallback, useState } from "react";
-import { Button } from "@/shared/components/button/button";
-import PredefinedHabitsList from "../../features/habits/components/PredefinedHabitsList";
-import Modal from "@/shared/ui/Modal";
-import HabitForm from "@/features/habits/components/HabitForm";
-import { Plus } from "lucide-react";
-import Tabs from "@/shared/ui/Tabs";
 import HabitProgressForToday from "@/features/progress/components/HabitProgressForToday";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/shared/components/tooltip";
 import { cn } from "@/shared/lib/utils";
+import HabitCreationModal from "@/features/habits/components/HabitCreationModal";
 
 const NAV_ITEMS = [
   { label: "Habits", path: "/" },
@@ -21,6 +11,10 @@ const NAV_ITEMS = [
 
 function Header() {
   const [showHabitModal, setShowHabitModal] = useState(false);
+
+  const handleOpenHabitModal = useCallback(() => {
+    setShowHabitModal(true);
+  }, []);
 
   const handleCloseHabitModal = useCallback(() => {
     setShowHabitModal(false);
@@ -52,45 +46,11 @@ function Header() {
         <div className="flex items-center space-x-1 md:space-x-2">
           <HabitProgressForToday />
 
-          <Modal
+          <HabitCreationModal
             isOpen={showHabitModal}
-            onClose={() => setShowHabitModal(false)}
-          >
-            <Modal.OpenButton>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    onClick={() => setShowHabitModal(true)}
-                    variant="ghost"
-                    className="flex items-center gap-1 border border-stone-300 rounded-lg px-4 py-2 text-sm font-semibold hover:bg-muted/50 transition cursor-pointer"
-                  >
-                    <Plus className="w-4 h-4 text-primary" strokeWidth={3} />
-                    <span>Add Habit</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Creating New Habit</p>
-                </TooltipContent>
-              </Tooltip>
-            </Modal.OpenButton>
-
-            <Modal.Content>
-              <Tabs
-                dataSource={[
-                  {
-                    title: "Create New Habit",
-                    content: <HabitForm onClose={handleCloseHabitModal} />,
-                  },
-                  {
-                    title: "Select The Habit",
-                    content: (
-                      <PredefinedHabitsList onClose={handleCloseHabitModal} />
-                    ),
-                  },
-                ]}
-              />
-            </Modal.Content>
-          </Modal>
+            onOpen={handleOpenHabitModal}
+            onClose={handleCloseHabitModal}
+          />
         </div>
       </div>
     </header>
