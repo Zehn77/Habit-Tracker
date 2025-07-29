@@ -16,11 +16,10 @@ type TabsProps = {
 };
 
 export default function Tabs({ dataSource }: TabsProps) {
-  const tabs = [...dataSource];
   return (
-    <TabBar defaultValue={tabs[0].title} className="mt-3">
+    <TabBar defaultValue={dataSource[0].title} className="mt-3">
       <TabsList className="w-full">
-        {tabs.map((tab) => (
+        {dataSource.map((tab) => (
           <TabsTrigger
             key={tab.title}
             value={tab.title}
@@ -31,7 +30,7 @@ export default function Tabs({ dataSource }: TabsProps) {
         ))}
       </TabsList>
 
-      {tabs.map((tab) => (
+      {dataSource.map((tab) => (
         <TabsContent key={tab.title} value={tab.title}>
           {tab.content}
         </TabsContent>
