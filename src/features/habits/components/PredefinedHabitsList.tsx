@@ -2,13 +2,12 @@ import { DialogFooter } from "@/shared/components/dialog";
 import { Button } from "@/shared/components/button/button";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { memo, useState } from "react";
-import { PREDEFINED_HABITS } from "@/features/habits/constants";
 import type { Habit } from "@/features/habits/types";
 import { useDispatch } from "react-redux";
 import { addHabit } from "@/features/habits/slice";
 import { useSelector } from "react-redux";
-import type { RootState } from "@/app/store";
 import { Inbox } from "lucide-react";
+import { selectFilteredPredefinedHabits } from "@/features/habits/selectors";
 
 type PredefinedHabitsListProps = {
   onClose: () => void;
@@ -18,11 +17,7 @@ function PredefinedHabitsList({ onClose }: PredefinedHabitsListProps) {
   const [selectedHabitId, setSelectedHabitId] = useState<string | null>(null);
   const dispatch = useDispatch();
 
-  const existingHabits = useSelector((state: RootState) => state.habits);
-
-  const filteredPredefinedHabits = PREDEFINED_HABITS.filter(
-    (pre) => !existingHabits.some((habit) => habit.id === pre.id)
-  );
+  const filteredPredefinedHabits = useSelector(selectFilteredPredefinedHabits);
 
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
