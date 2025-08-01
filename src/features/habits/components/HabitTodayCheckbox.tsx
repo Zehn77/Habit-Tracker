@@ -1,24 +1,19 @@
 import { Checkbox } from "@/shared/components/checkbox";
 import { Label } from "@/shared/components/label";
 import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "@/app/store";
 import type { HabitProgressEntry } from "@/features/progress/types";
 import { addProgress, deleteProgress } from "@/features/progress/slice";
 import { formatDateToISO } from "@/shared/lib/date";
+import { selectTodayProgressByHabitId } from "@/features/progress/progressSelectors";
 
 type HabitTodayCheckboxProps = {
   habitId: string;
 };
 
 function HabitTodayCheckbox({ habitId }: HabitTodayCheckboxProps) {
-  const allProgress = useSelector((state: RootState) => state.progress);
   const dispatch = useDispatch();
 
-  const habitProgress = allProgress.find(
-    (entry) =>
-      entry.habitId === habitId && entry.date === formatDateToISO(new Date())
-  );
-
+  const habitProgress = useSelector(selectTodayProgressByHabitId(habitId));
   const checked: boolean = habitProgress?.status === "completed" || false;
 
   function handleCheckboxChange(value: boolean) {

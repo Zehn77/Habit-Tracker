@@ -11,3 +11,14 @@ export const selectHabitProgressForToday = createSelector(
     ).length;
   }
 );
+
+export const selectTodayProgressByHabitId = (habitId: string) =>
+  createSelector(
+    (state: RootState) => state.progress,
+    (progress) =>
+      progress.find(
+        (entry) =>
+          entry.habitId === habitId &&
+          entry.date === formatDateToISO(new Date())
+      )
+  );
