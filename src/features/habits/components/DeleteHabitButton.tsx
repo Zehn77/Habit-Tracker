@@ -39,6 +39,7 @@ export default function DeleteHabitButton({ habit }: { habit: Habit }) {
             variant="outline"
             size="sm"
             className="cursor-pointer"
+            aria-label="Delete habit"
           >
             <Trash2 className="w-4 h-4" />
           </Button>

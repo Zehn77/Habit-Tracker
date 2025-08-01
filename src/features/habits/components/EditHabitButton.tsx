@@ -28,6 +28,7 @@ export default function EditHabitButton({ habit }: { habit: Habit }) {
               size="sm"
               className="cursor-pointer"
               onClick={() => setShowHabitModal(true)}
+              aria-label="Edit habit"
             >
               <Pencil className="w-4 h-4" />
             </Button>

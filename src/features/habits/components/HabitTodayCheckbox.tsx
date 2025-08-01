@@ -41,6 +41,9 @@ function HabitTodayCheckbox({ habitId }: HabitTodayCheckboxProps) {
         checked={checked}
         onCheckedChange={handleCheckboxChange}
         className="border border-gray-300 data-[state=checked]:bg-green-500 data-[state=checked]:text-white data-[state=checked]:border-green-500"
+        aria-label={`Mark habit as ${
+          checked ? "uncompleted" : "completed"
+        } for today`}
       />
       {checked ? (
         <span className="underline text-green-500">Completed</span>
