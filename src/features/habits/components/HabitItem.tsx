@@ -8,6 +8,7 @@ import {
   CardFooter,
 } from "@/shared/components/card";
 import HabitTodayCheckbox from "./HabitTodayCheckbox";
+import { generatePath } from "react-router-dom";
 
 import EditHabitButton from "./EditHabitButton";
 import DeleteHabitButton from "./DeleteHabitButton";
@@ -32,7 +33,7 @@ export default function HabitItem({ habit }: HabitItemProps) {
         </div>
 
         <Link
-          to={`/habit/${habit.id}`}
+          to={generatePath("/habit/:habitId", { habitId: habit.id })}
           className="hover:text-blue-600 hover:underline transition duration-300 italic text-sm text-blue-400"
         >
           Details...
