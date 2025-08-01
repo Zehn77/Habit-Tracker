@@ -2,7 +2,6 @@ import { DialogFooter } from "@/shared/components/dialog";
 import { Button } from "@/shared/components/button/button";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { memo, useState } from "react";
-import type { Habit } from "@/features/habits/types";
 import { useDispatch } from "react-redux";
 import { addHabit } from "@/features/habits/slice";
 import { useSelector } from "react-redux";
@@ -22,9 +21,11 @@ function PredefinedHabitsList({ onClose }: PredefinedHabitsListProps) {
   function handleOnSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const selectedHabit: Habit = filteredPredefinedHabits.filter(
+    const selectedHabit = filteredPredefinedHabits.find(
       (habit) => habit.id === selectedHabitId
-    )[0];
+    );
+
+    if (!selectedHabit) return;
 
     dispatch(addHabit(selectedHabit));
 
