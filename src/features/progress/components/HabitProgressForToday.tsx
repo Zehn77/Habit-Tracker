@@ -3,7 +3,6 @@ const baseBadgeClass =
 
 import { useSelector } from "react-redux";
 import type { RootState } from "@/app/store";
-import { formatDateToISO } from "@/shared/lib/date";
 import { Badge } from "@/shared/components/badge/badge";
 import {
   Tooltip,
@@ -11,18 +10,13 @@ import {
   TooltipTrigger,
 } from "@/shared/components/tooltip";
 import { cn } from "@/shared/lib/utils";
+import { selectHabitProgressForToday } from "../progressSelectors";
 
 export default function HabitProgressForToday() {
-  const habits = useSelector((state: RootState) => state.habits);
-  const allProgress = useSelector((state: RootState) => state.progress);
-
-  const habitsCount = habits.length;
-  const today = new Date();
-  const todayISO = formatDateToISO(today);
-
-  const completedTodayProgressesCount = allProgress.filter(
-    (entry) => entry.date === todayISO && entry.status === "completed"
-  ).length;
+  const habitsCount = useSelector((state: RootState) => state.habits.length);
+  const completedTodayProgressesCount = useSelector(
+    selectHabitProgressForToday
+  );
 
   return (
     <div className="flex items-end gap-2">
